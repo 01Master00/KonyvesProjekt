@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Media.Animation;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace KonyvesProjekt
@@ -14,6 +15,15 @@ namespace KonyvesProjekt
         private string cim;
         private string kinel;
         private string mikortol;
+
+        public Konyv(string id, string szerzo, string cim)
+        {
+            this.id = id;
+            this.szerzo = szerzo;
+            this.cim = cim;
+            this.kinel = "nincs kölcsönözve";
+            this.mikortol = "nincs dátum";
+        }
 
         public Konyv(string id, string szerzo, string cim, string kinel, string mikortol)
         {

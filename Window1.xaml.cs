@@ -19,9 +19,20 @@ namespace KonyvesProjekt
     /// </summary>
     public partial class Window1 : Window
     {
+        Konyv k;
+        Adatbazis adatbazis = new Adatbazis();
         public Window1()
         {
             InitializeComponent();
+        }
+
+        private void btn_elkuld_Click(object sender, RoutedEventArgs e)
+        {
+            k = new Konyv(tb_id.Text,tb_szerzo.Text,tb_cim.Text );
+            adatbazis.AddToList(k);
+            adatbazis.UjKonyv(k);
+            MessageBox.Show("Uj könyv felvétele megtörpént", "siekres felvétel", MessageBoxButton.OK, MessageBoxImage.Information);
+            this.Close();
         }
     }
 }

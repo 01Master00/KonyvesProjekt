@@ -30,7 +30,10 @@ namespace KonyvesProjekt
 
         private void btn_ujkonyv_Click(object sender, RoutedEventArgs e)
         {
-
+            Window1 ujkonyv = new Window1();
+            ujkonyv.ShowDialog();
+            dg_adatok.ItemsSource = adatbazis.Konyvek;
+            dg_adatok.Items.Refresh();
         }
     }
 }

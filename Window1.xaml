@@ -5,14 +5,15 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:KonyvesProjekt"
         mc:Ignorable="d"
-        Title="Window1" Height="450" Width="800">
-    <Grid>
-        <Label Content="Név: " HorizontalAlignment="Left" Margin="30,37,0,0" VerticalAlignment="Top" Width="44"/>
+        Title="Window1" Height="225" Width="302">
+    <Grid Margin="0,0,10,5">
+        <Label Content="ID: " HorizontalAlignment="Left" Margin="52,37,0,0" VerticalAlignment="Top" Width="22"/>
         <TextBox x:Name="tb_id" HorizontalAlignment="Left" Margin="107,37,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" Height="26"/>
-        <Label Content="Név: " HorizontalAlignment="Left" Margin="30,70,0,0" VerticalAlignment="Top" Width="44"/>
-        <TextBox x:Name="tb_cim" HorizontalAlignment="Left" Margin="107,70,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" Height="26"/>
-        <Label Content="Név: " HorizontalAlignment="Left" Margin="30,110,0,0" VerticalAlignment="Top" Width="44"/>
-        <TextBox x:Name="tb_szerzo" HorizontalAlignment="Left" Margin="107,110,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" Height="26"/>
+        <Label Content="Szerző: " HorizontalAlignment="Left" Margin="30,70,0,0" VerticalAlignment="Top" Width="44"/>
+        <TextBox x:Name="tb_szerzo" HorizontalAlignment="Left" Margin="107,70,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" Height="26"/>
+        <Label Content="könyv címe: " HorizontalAlignment="Left" Margin="0,110,0,0" VerticalAlignment="Top" Width="74"/>
+        <TextBox x:Name="tb_cim" HorizontalAlignment="Left" Margin="107,110,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" Height="26"/>
+        <Button x:Name="btn_elkuld" Content="Elküld" HorizontalAlignment="Left" Height="34" Margin="107,160,0,0" VerticalAlignment="Top" Width="101" Click="btn_elkuld_Click"/>
 
     </Grid>
 </Window>

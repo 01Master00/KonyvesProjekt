@@ -20,6 +20,11 @@ namespace KonyvesProjekt
            // Menu();
         }
 
+        public  void AddToList(Konyv k)
+        {
+            konyvek.Add(k);
+        }
+
         public void Menu()
         {
               /* 
@@ -126,7 +131,7 @@ namespace KonyvesProjekt
                 catch (Exception ex)
                 {
                     Console.WriteLine("Hiba történt: " + ex.Message);
-                    Console.ReadKey();
+                   // Environment.Exit();
                 }
             }
         }
@@ -139,7 +144,7 @@ namespace KonyvesProjekt
 
             while (oldalSzam * oldalMeret < osszesSor)
             {
-                Console.Clear();
+              
                 Console.WriteLine($"Könyvek listája - {oldalSzam + 1}. oldal\n");
 
                 for (int i = oldalSzam * oldalMeret; i < Math.Min((oldalSzam + 1) * oldalMeret, osszesSor); i++)
@@ -160,6 +165,33 @@ namespace KonyvesProjekt
                 }
             }
         }
+
+        //adatbázisba uj könyv felvétele
+        public void UjKonyv(Konyv k)
+        {
+            using (MySqlConnection conn = new MySqlConnection(connectionString))
+            {
+                try
+                {
+                    conn.Open();
+                    string query = "INSERT INTO konyv (konyv_id, szerzo, cim, kinel_van, mikortol) VALUES (@id, @szerzo, @cim, @kinel_van, @mikortol)";
+                    MySqlCommand cmd = new MySqlCommand(query, conn);
+                    cmd.Parameters.AddWithValue("@id", k.Id);
+                    cmd.Parameters.AddWithValue("@szerzo", k.Szerzo);
+                    cmd.Parameters.AddWithValue("@cim", k.Cim);
+                    cmd.Parameters.AddWithValue("@kinel_van", k.Kinel);
+                    cmd.Parameters.AddWithValue("@mikortol", k.Mikortol);
+                    cmd.ExecuteNonQuery();
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("Hiba történt: " + ex.Message);
+                  
+                }
+            }
+        }
+
+
     }
 }
 
