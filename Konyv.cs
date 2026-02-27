@@ -10,22 +10,22 @@ namespace KonyvesProjekt
 {
     internal class Konyv
     {
-        private string id;
+        private int id;
         private string szerzo;
         private string cim;
         private string kinel;
         private string mikortol;
 
-        public Konyv(string id, string szerzo, string cim)
+        public Konyv(int id, string szerzo, string cim)
         {
             this.id = id;
             this.szerzo = szerzo;
             this.cim = cim;
-            this.kinel = "nincs kölcsönözve";
-            this.mikortol = "nincs dátum";
+            this.kinel = "9999";
+            this.mikortol = null;
         }
 
-        public Konyv(string id, string szerzo, string cim, string kinel, string mikortol)
+        public Konyv(int id, string szerzo, string cim, string kinel, string mikortol)
         {
             this.id = id;
             this.szerzo = szerzo;
@@ -34,7 +34,7 @@ namespace KonyvesProjekt
             this.mikortol = mikortol;
         }
 
-        public string Id { get => id; set => id = value; }
+        public int Id { get => id; set => id = value; }
         public string Szerzo { get => szerzo; set => szerzo = value; }
         public string Cim { get => cim; set => cim = value; }
         public string Kinel { get => kinel; set => kinel = value; }
@@ -43,7 +43,7 @@ namespace KonyvesProjekt
 
         public override string ToString()
         {
-            return $"{id.PadRight(4)} {szerzo.PadRight(20)} {cim.PadRight(30)} {kinel.PadRight(20)} {mikortol}";
+            return $"{id} {szerzo.PadRight(20)} {cim.PadRight(30)} {kinel.PadRight(20)} {mikortol}";
         }
     }
 }

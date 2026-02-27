@@ -9,7 +9,8 @@
     <Grid Background="AliceBlue">
         <DataGrid x:Name="dg_adatok"  Background="Beige" Margin="10,63,10,10"/>
         <Button  x:Name="btn_beolvas" Content="Adatok beolvasása" HorizontalAlignment="Left" Margin="10,21,0,0" VerticalAlignment="Top" Width="120" Height="25" Click="Button_Click"/>
-        <Button x:Name="btn_ujkonyv" Content="Uj könyv" HorizontalAlignment="Left"  Margin="150,21,0,0" VerticalAlignment="Top" Height="25" Width="85" Click="btn_ujkonyv_Click"/>
+        <Button x:Name="btn_ujkonyv" IsEnabled="False" Content="Uj könyv" HorizontalAlignment="Left"  Margin="150,21,0,0" VerticalAlignment="Top" Height="25" Width="85" Click="btn_ujkonyv_Click"/>
+        <Button x:Name="btn_Ktorol" IsEnabled="False" Content="Elem törlése" HorizontalAlignment="Left"  Margin="250,21,0,0" VerticalAlignment="Top" Height="25" Width="85" Click="btn_Ktorol_Click"/>
 
     </Grid>
 </Window>

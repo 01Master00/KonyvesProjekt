@@ -26,6 +26,8 @@ namespace KonyvesProjekt
         {
             dg_adatok.ItemsSource = adatbazis.Konyvek;
             btn_beolvas.IsEnabled = false;
+            btn_ujkonyv.IsEnabled = true;
+            btn_Ktorol.IsEnabled = true;
         }
 
         private void btn_ujkonyv_Click(object sender, RoutedEventArgs e)
@@ -35,5 +37,18 @@ namespace KonyvesProjekt
             dg_adatok.ItemsSource = adatbazis.Konyvek;
             dg_adatok.Items.Refresh();
         }
+
+        private void btn_Ktorol_Click(object sender, RoutedEventArgs e)
+        {
+            if (dg_adatok.SelectedItem is Konyv selectedKonyv)
+            {
+                adatbazis.Konyvek.Remove(selectedKonyv);
+                adatbazis.TorolKonyv(selectedKonyv);
+                dg_adatok.ItemsSource = adatbazis.Konyvek;
+                dg_adatok.Items.Refresh();
+            }
+        }
+
+
     }
 }

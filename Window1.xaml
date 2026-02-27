@@ -6,14 +6,25 @@
         xmlns:local="clr-namespace:KonyvesProjekt"
         mc:Ignorable="d"
         Title="Window1" Height="225" Width="302">
-    <Grid Margin="0,0,10,5">
-        <Label Content="ID: " HorizontalAlignment="Left" Margin="52,37,0,0" VerticalAlignment="Top" Width="22"/>
-        <TextBox x:Name="tb_id" HorizontalAlignment="Left" Margin="107,37,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" Height="26"/>
-        <Label Content="Szerző: " HorizontalAlignment="Left" Margin="30,70,0,0" VerticalAlignment="Top" Width="44"/>
-        <TextBox x:Name="tb_szerzo" HorizontalAlignment="Left" Margin="107,70,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" Height="26"/>
-        <Label Content="könyv címe: " HorizontalAlignment="Left" Margin="0,110,0,0" VerticalAlignment="Top" Width="74"/>
-        <TextBox x:Name="tb_cim" HorizontalAlignment="Left" Margin="107,110,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" Height="26"/>
-        <Button x:Name="btn_elkuld" Content="Elküld" HorizontalAlignment="Left" Height="34" Margin="107,160,0,0" VerticalAlignment="Top" Width="101" Click="btn_elkuld_Click"/>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Label Grid.Row="0" Grid.Column="0" Content="ID: "  Width="22"/>
+        <TextBox Grid.Row="0" Grid.Column="1" x:Name="tb_id" TextWrapping="Wrap" Text="" Width="120" Height="26"/>
+        <Label Grid.Row="1" Grid.Column="0" Width="44" Content="Szerző: "/>
+        <TextBox Grid.Row="1" Grid.Column="1" x:Name="tb_szerzo" TextWrapping="Wrap" Text="" Width="120" Height="26"/>
+        <Label Grid.Row="2" Grid.Column="0" Content="könyv címe: " Width="74"/>
+        <TextBox Grid.Row="2" Grid.Column="1" x:Name="tb_cim" TextWrapping="Wrap" Text="" Width="120" Height="26"/>
+        <Button Grid.Row="3" Grid.Column="0" x:Name="btn_elkuld" Content="Elküld" Width="101" Click="btn_elkuld_Click" Background="Green"/>
+        <Button Grid.Row="3" Grid.Column="1" x:Name="btn_torol" Content="Törlés" Width="101" Click="btn_torol_Click" Background="Red"/>
 
     </Grid>
 </Window>

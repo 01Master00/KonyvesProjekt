@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Controls.Primitives;
+using System.Diagnostics;
 
 namespace KonyvesProjekt
 {
@@ -107,7 +109,7 @@ namespace KonyvesProjekt
 
                     while (reader.Read())
                     {
-                        string id = reader["konyv_id"].ToString().PadRight(4);
+                        int id = reader.GetInt32("konyv_id");
                         string szerzo = reader["szerzo"].ToString().TrimEnd().PadRight(33);
                         string cim = reader["cim"].ToString().TrimEnd().PadRight(36);
                         string kinel = reader["nev"].ToString().TrimEnd().PadRight(30);
@@ -124,6 +126,7 @@ namespace KonyvesProjekt
                         }
 
                         konyvek.Add(new Konyv(id, szerzo, cim, kinel, mikortol));
+                        Debug.WriteLine($"ID: {id}, Szerző: {szerzo}, Cím: {cim}, Kinek van: {kinel}, Mikortól: {mikortol}");
                     }
 
                     reader.Close();
@@ -135,9 +138,9 @@ namespace KonyvesProjekt
                 }
             }
         }
+        /*
         public void Listaz()
         {
-            // Lapozás 10 soronként -- ehhez nincs hozzáfűznivalóm
             int oldalMeret = 10;
             int osszesSor = konyvek.Count;
             int oldalSzam = 0;
@@ -165,8 +168,8 @@ namespace KonyvesProjekt
                 }
             }
         }
+        */
 
-        //adatbázisba uj könyv felvétele
         public void UjKonyv(Konyv k)
         {
             using (MySqlConnection conn = new MySqlConnection(connectionString))
@@ -185,13 +188,32 @@ namespace KonyvesProjekt
                 }
                 catch (Exception ex)
                 {
-                    Console.WriteLine("Hiba történt: " + ex.Message);
+                    Trace.WriteLine("Hiba történt: " + ex.Message);
                   
                 }
             }
         }
 
+        public void TorolKonyv(Konyv selectedKonyv)
+        {
+            using (MySqlConnection conn = new MySqlConnection(connectionString))
+            {
+                try
+                {
+                    conn.Open();
+                    string query = "DELETE FROM konyv WHERE konyv_id = @id";
+                    MySqlCommand cmd = new MySqlCommand(query, conn);
+                    cmd.Parameters.AddWithValue("@id", selectedKonyv.Id);
+                    cmd.ExecuteNonQuery();
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("Hiba történt: " + ex.Message);
 
+                }
+
+            }
+        }
     }
 }
 
