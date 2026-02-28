@@ -13,7 +13,7 @@ namespace KonyvesProjekt
     {
         string connectionString = "server=localhost;user=root;database=mini_konyvtar;port=3306;password=";
         List<Konyv> konyvek = new List<Konyv>();
-
+        Dictionary<int, string> olvasok = new Dictionary<int, string>();
         internal List<Konyv> Konyvek { get => konyvek; set => konyvek = value; }
 
         public Adatbazis()
@@ -26,7 +26,7 @@ namespace KonyvesProjekt
         {
             konyvek.Add(k);
         }
-
+    
         public void Menu()
         {
               /* 
@@ -93,6 +93,35 @@ namespace KonyvesProjekt
             }
             while (valasztas != "0");*/
         }
+        public void BeolvasOlvasok()
+        {
+            using (MySqlConnection conn = new MySqlConnection(connectionString))
+            {
+                try
+                {
+                    conn.Open();
+                    string query = "SELECT * FROM olvaso";
+                    MySqlCommand cmd = new MySqlCommand(query, conn);
+                    MySqlDataReader reader = cmd.ExecuteReader();                   
+
+                    while (reader.Read())
+                    {
+                        int id = reader.GetInt32("olvaso_id");
+                        string szerzo = reader.GetString("nev");                        
+                        olvasok.Add(id, szerzo);
+                    }
+
+                    reader.Close();
+                }
+                catch (Exception ex)
+                {
+
+                    Console.WriteLine("Hiba történt: " + ex.Message);
+                    // Environment.Exit();
+                }
+            }
+        }
+
 
         public void BeolvasKnyveket()
         {
@@ -101,7 +130,7 @@ namespace KonyvesProjekt
                 try
                 {
                     conn.Open();
-                    string query = "SELECT konyv_id, szerzo, cim, mikortol, olvaso.nev FROM konyv, olvaso WHERE kinel_van=olvaso.olvaso_id";
+                    string query = "SELECT konyv_id, szerzo, cim, mikortol, kinel_van FROM konyv";
                     MySqlCommand cmd = new MySqlCommand(query, conn);
                     MySqlDataReader reader = cmd.ExecuteReader();
 
@@ -110,9 +139,9 @@ namespace KonyvesProjekt
                     while (reader.Read())
                     {
                         int id = reader.GetInt32("konyv_id");
-                        string szerzo = reader["szerzo"].ToString().TrimEnd().PadRight(33);
-                        string cim = reader["cim"].ToString().TrimEnd().PadRight(36);
-                        string kinel = reader["nev"].ToString().TrimEnd().PadRight(30);
+                        string szerzo = reader.GetString("szerzo");
+                        string cim = reader.GetString("cim");
+                        int kinel = reader.GetInt32("kinel_van");
                         DateTime datum;
                         string mikortol;
 
@@ -133,6 +162,7 @@ namespace KonyvesProjekt
                 }
                 catch (Exception ex)
                 {
+                    
                     Console.WriteLine("Hiba történt: " + ex.Message);
                    // Environment.Exit();
                 }
@@ -185,6 +215,7 @@ namespace KonyvesProjekt
                     cmd.Parameters.AddWithValue("@kinel_van", k.Kinel);
                     cmd.Parameters.AddWithValue("@mikortol", k.Mikortol);
                     cmd.ExecuteNonQuery();
+                    konyvek.Add(k);
                 }
                 catch (Exception ex)
                 {

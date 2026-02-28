@@ -13,7 +13,7 @@ namespace KonyvesProjekt
         private int id;
         private string szerzo;
         private string cim;
-        private string kinel;
+        private int kinel;
         private string mikortol;
 
         public Konyv(int id, string szerzo, string cim)
@@ -21,11 +21,11 @@ namespace KonyvesProjekt
             this.id = id;
             this.szerzo = szerzo;
             this.cim = cim;
-            this.kinel = "9999";
+            this.kinel = 9999;
             this.mikortol = null;
         }
 
-        public Konyv(int id, string szerzo, string cim, string kinel, string mikortol)
+        public Konyv(int id, string szerzo, string cim, int kinel, string mikortol)
         {
             this.id = id;
             this.szerzo = szerzo;
@@ -37,13 +37,13 @@ namespace KonyvesProjekt
         public int Id { get => id; set => id = value; }
         public string Szerzo { get => szerzo; set => szerzo = value; }
         public string Cim { get => cim; set => cim = value; }
-        public string Kinel { get => kinel; set => kinel = value; }
+        public int Kinel { get => kinel; set => kinel = value; }
         public string Mikortol { get => mikortol; set => mikortol = value; }
 
 
         public override string ToString()
         {
-            return $"{id} {szerzo.PadRight(20)} {cim.PadRight(30)} {kinel.PadRight(20)} {mikortol}";
+            return $"{id} {szerzo.PadRight(20)} {cim.PadRight(30)} {kinel} {mikortol}";
         }
     }
 }

@@ -20,7 +20,7 @@ namespace KonyvesProjekt
     public partial class Window1 : Window
     {
         Konyv k;
-        Adatbazis adatbazis = new Adatbazis();
+       
         public Window1()
         {
             InitializeComponent();
@@ -30,8 +30,7 @@ namespace KonyvesProjekt
         private void btn_elkuld_Click(object sender, RoutedEventArgs e)
         {
             k = new Konyv(Convert.ToInt32(tb_id.Text),tb_szerzo.Text,tb_cim.Text );
-            adatbazis.AddToList(k);
-            adatbazis.UjKonyv(k);
+            MainWindow.Adatbazis.UjKonyv(k);
             MessageBox.Show("Uj könyv felvétele megtörpént", "siekres felvétel", MessageBoxButton.OK, MessageBoxImage.Information);
             this.Close();
         }
@@ -45,7 +44,7 @@ namespace KonyvesProjekt
 
         private int GetLastID()
         {
-            int lastID = adatbazis.Konyvek.Count > 0 ? adatbazis.Konyvek.Last().Id : 0;
+            int lastID = MainWindow.Adatbazis.Konyvek.Count > 0 ? MainWindow.Adatbazis.Konyvek.Last().Id : 0;
             tb_id.Text = (lastID + 1).ToString();
             return lastID + 1;
         }

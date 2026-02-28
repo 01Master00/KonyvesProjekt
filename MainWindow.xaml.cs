@@ -16,12 +16,23 @@ namespace KonyvesProjekt
     /// </summary>
     public partial class MainWindow : Window
     {
-        Adatbazis adatbazis = new Adatbazis();
+        private static Adatbazis adatbazis = new Adatbazis();
+
+        internal static Adatbazis Adatbazis { get => adatbazis; set => adatbazis = value; }
+
         public MainWindow()
         {
             InitializeComponent();
+            try
+            {
+                adatbazis = new Adatbazis();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Hiba az adatbázis kapcsolat létrehozásakor: " + ex.Message, "Hiba", MessageBoxButton.OK, MessageBoxImage.Error);
+                Application.Current.Shutdown();
+            }
         }
-
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             dg_adatok.ItemsSource = adatbazis.Konyvek;
@@ -34,8 +45,9 @@ namespace KonyvesProjekt
         {
             Window1 ujkonyv = new Window1();
             ujkonyv.ShowDialog();
+            dg_adatok.ItemsSource = null;
             dg_adatok.ItemsSource = adatbazis.Konyvek;
-            dg_adatok.Items.Refresh();
+            CollectionViewSource.GetDefaultView(dg_adatok.ItemsSource).Refresh();
         }
 
         private void btn_Ktorol_Click(object sender, RoutedEventArgs e)
